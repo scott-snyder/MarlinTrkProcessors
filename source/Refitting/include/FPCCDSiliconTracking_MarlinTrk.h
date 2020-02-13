@@ -761,6 +761,7 @@ protected:
      Triplet(const Triplet& obj) : IMPL::TrackImpl(obj){
        *this = obj;
      }
+     Triplet& operator= (const Triplet&) = default;
   };
   Triplet* _curtriplet;
   
@@ -799,6 +800,7 @@ protected:
      BuildedTrack(const BuildedTrack& obj) : IMPL::TrackImpl(obj){
        *this = obj;
      }
+     BuildedTrack& operator= (const BuildedTrack& obj) = default;
   };
   bool _availableInBuildedTrack;
 
