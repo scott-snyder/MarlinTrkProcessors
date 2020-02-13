@@ -1,0 +1,97 @@
+Bottom: 43690013f322cadf0d041ec81ec511098aebdbef
+Top:    f3f92b3db69f1c2a508daf2beb92a8ba747f42d6
+Author: scott snyder <sss@karma>
+Date:   2020-02-13 03:36:07 -0500
+
+Refresh of warn
+
+---
+
+diff --git a/source/Digitisers/src/FixedPadSizeDiskLayout.cc b/source/Digitisers/src/FixedPadSizeDiskLayout.cc
+index dbcb8eb..c7af6c8 100644
+--- a/source/Digitisers/src/FixedPadSizeDiskLayout.cc
++++ b/source/Digitisers/src/FixedPadSizeDiskLayout.cc
+@@ -147,7 +147,7 @@ double FixedPadSizeDiskLayout::getPadWidth(int padIndex) const {
+     return _padWidth / _rows.at( rowNum ).RCenter ;
+ 
+   }
+-  catch(std::out_of_range){
++  catch(const std::out_of_range&){
+     return 0. ;
+   }
+ }
+@@ -162,7 +162,7 @@ double FixedPadSizeDiskLayout::getPadPitch(int padIndex) const {
+     return _rows.at( rowNum ).PhiPad;
+ 
+   }
+-  catch(std::out_of_range){
++  catch(const std::out_of_range&){
+     return 0. ;
+   }
+ }
+diff --git a/source/Refitting/include/FPCCDSiliconTracking_MarlinTrk.h b/source/Refitting/include/FPCCDSiliconTracking_MarlinTrk.h
+index 2e63369..4f844b2 100644
+--- a/source/Refitting/include/FPCCDSiliconTracking_MarlinTrk.h
++++ b/source/Refitting/include/FPCCDSiliconTracking_MarlinTrk.h
+@@ -761,6 +761,7 @@ protected:
+      Triplet(const Triplet& obj) : IMPL::TrackImpl(obj){
+        *this = obj;
+      }
++     Triplet& operator= (const Triplet&) = default;
+   };
+   Triplet* _curtriplet;
+   
+@@ -799,6 +800,7 @@ protected:
+      BuildedTrack(const BuildedTrack& obj) : IMPL::TrackImpl(obj){
+        *this = obj;
+      }
++     BuildedTrack& operator= (const BuildedTrack& obj) = default;
+   };
+   bool _availableInBuildedTrack;
+ 
+diff --git a/source/Refitting/src/DDCellsAutomatonMV.cc b/source/Refitting/src/DDCellsAutomatonMV.cc
+index 82689e1..bbae05c 100644
+--- a/source/Refitting/src/DDCellsAutomatonMV.cc
++++ b/source/Refitting/src/DDCellsAutomatonMV.cc
+@@ -560,7 +560,7 @@ void DDCellsAutomatonMV::processEvent( LCEvent * evt ) {
+ 	streamlog_out( DEBUG2 ) << "Keeping track because of good helix fit: chi2/ndf = " << chi2OverNdf << "\n";
+       }
+     }
+-    catch( VXDHelixFitterException e ){
++    catch( const VXDHelixFitterException& e ){
+       
+       
+       streamlog_out( DEBUG2 ) << "Track rejected, because fit failed: " <<  e.what() << "\n";
+@@ -610,7 +610,7 @@ void DDCellsAutomatonMV::processEvent( LCEvent * evt ) {
+       
+       
+     }
+-    catch( FitterException e ){
++    catch( const FitterException& e ){
+       
+       streamlog_out( DEBUG4 ) << "Track rejected, because fit failed: " <<  e.what() << "\n";
+       delete trackCand;
+@@ -737,7 +737,7 @@ void DDCellsAutomatonMV::processEvent( LCEvent * evt ) {
+ 	  }
+ 	}
+ 	
+-	catch( FitterException e ){
++	catch( const FitterException& e ){
+ 	  
+ 	  streamlog_out( DEBUG4 ) << "DDCellsAutomatonMV: track couldn't be finalized due to fitter error: " << e.what() << "\n";
+ 	  delete trackImpl;
+diff --git a/source/Refitting/src/SiliconTracking_MarlinTrk.cc b/source/Refitting/src/SiliconTracking_MarlinTrk.cc
+index 7fc1bec..1900876 100644
+--- a/source/Refitting/src/SiliconTracking_MarlinTrk.cc
++++ b/source/Refitting/src/SiliconTracking_MarlinTrk.cc
+@@ -2296,9 +2296,8 @@ void SiliconTracking_MarlinTrk::CreateTrack(TrackExtended * trackAR ) {
+ 
+ 	  trackAR->ClearTrackerHitExtendedVec();
+ 	  for (int i=0;i<nHits;++i) {
+-	    int iopt = 2;
+ 	    TrackerHitExtended * trkHit = hitVec[i];
+-	    AttachHitToTrack(trackOld, trkHit, iopt );
++	    AttachHitToTrack(trackOld, trkHit, 2 );
+ 	  }
+ 
+ 	} else { // backward compatible
