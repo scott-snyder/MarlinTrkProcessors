@@ -128,7 +128,6 @@ namespace fpcompare_fn {
 
 
 struct equal
-  : public std::binary_function<double, double, bool>
 {
   bool
   operator()(double a, double b) const
@@ -137,7 +136,6 @@ struct equal
 
 
 struct equalf
-  : public std::binary_function<float, float, bool>
 {
   bool
   operator()(float a, float b) const
@@ -146,7 +144,6 @@ struct equalf
 
 
 struct greater
-  : public std::binary_function<double, double, bool>
 {
   bool
   operator()(double a, double b) const
@@ -155,7 +152,6 @@ struct greater
 
 
 struct greaterf
-  : public std::binary_function<float, float, bool>
 {
   bool
   operator()(float a, float b) const
@@ -164,7 +160,6 @@ struct greaterf
 
 
 struct less
-  : public std::binary_function<double, double, bool>
 {
   bool
   operator()(double a, double b) const
@@ -173,7 +168,6 @@ struct less
 
 
 struct lessf
-  : public std::binary_function<float, float, bool>
 {
   bool
   operator()(float a, float b) const
@@ -182,7 +176,6 @@ struct lessf
 
 
 struct greater_equal
-  : public std::binary_function<double, double, bool>
 {
   bool
   operator()(double a, double b) const
@@ -191,7 +184,6 @@ struct greater_equal
 
 
 struct greater_equalf
-  : public std::binary_function<float, float, bool>
 {
   bool
   operator()(float a, float b) const
@@ -200,7 +192,6 @@ struct greater_equalf
 
 
 struct less_equal
-  : public std::binary_function<double, double, bool>
 {
   bool
   operator()(double a, double b) const
@@ -209,7 +200,6 @@ struct less_equal
 
 
 struct less_equalf
-  : public std::binary_function<float, float, bool>
 {
   bool
   operator()(float a, float b) const
