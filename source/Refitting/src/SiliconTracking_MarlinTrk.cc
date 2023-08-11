@@ -2296,9 +2296,8 @@ void SiliconTracking_MarlinTrk::CreateTrack(TrackExtended * trackAR ) {
 
 	  trackAR->ClearTrackerHitExtendedVec();
 	  for (int i=0;i<nHits;++i) {
-	    int iopt = 2;
 	    TrackerHitExtended * trkHit = hitVec[i];
-	    AttachHitToTrack(trackOld, trkHit, iopt );
+	    AttachHitToTrack(trackOld, trkHit, 2 );
 	  }
 
 	} else { // backward compatible
