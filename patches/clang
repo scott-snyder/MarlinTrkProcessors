@@ -1,0 +1,8 @@
+Bottom: 708516e6447dcbb13f1099fe04fa16fd704d9258
+Top:    708516e6447dcbb13f1099fe04fa16fd704d9258
+Author: sss <sss@karma>
+Date:   2025-05-09 13:55:12 -0400
+
+Fix clang warnings.
+
+Unused variables.

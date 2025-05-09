@@ -1,9 +1,15 @@
 {
   "version": 5,
-  "prev": "a36b6851d128b9a608088cabf0bb9451bd828567",
-  "head": "92a1ba256de55c9eb66c9291542d1e6240ce242c",
-  "applied": [],
+  "prev": "7b93731c8cda9d8423b7c6215b4aa74bcbd095b4",
+  "head": "26b012cc83d6f7ae1ea76482ebd113cf5a8253ab",
+  "applied": [
+    "clang"
+  ],
   "unapplied": [],
   "hidden": [],
-  "patches": {}
+  "patches": {
+    "clang": {
+      "oid": "26b012cc83d6f7ae1ea76482ebd113cf5a8253ab"
+    }
+  }
 }
