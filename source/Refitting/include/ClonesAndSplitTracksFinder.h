@@ -40,39 +40,39 @@ public:
 
 protected:
   // Checks for overlapping hits
-  int overlappingHits(const Track*, const Track*);
+  int overlappingHits(const lcio::Track*, const lcio::Track*);
 
   // Picks up the best track between two clones (based on chi2 and length requirements)
-  void bestInClones(Track*, Track*, int, Track*&);
+  void bestInClones(lcio::Track*, lcio::Track*, int, lcio::Track*&);
 
   // Service function to set the information from a Track* object to a TrackImpl* object
-  void fromTrackToTrackImpl(const Track*, TrackImpl*&);
+  void fromTrackToTrackImpl(const lcio::Track*, lcio::TrackImpl*&);
 
   // Merges hits from two tracks in one and fits it
-  void mergeAndFit(Track*, Track*, Track*&);
+  void mergeAndFit(lcio::Track*, lcio::Track*, lcio::Track*&);
 
   // Removes doubles (from clone treatments and track merging) and filters multiple connections (clones and mergeable
   // tracks treated differently)
-  void filterClonesAndMergedTracks(std::multimap<int, std::pair<int, Track*>>&, LCCollection*&, TrackVec&, bool);
+  void filterClonesAndMergedTracks(std::multimap<int, std::pair<int, lcio::Track*>>&, lcio::LCCollection*&, lcio::TrackVec&, bool);
 
   // Contains the whole merging procedure (calls filterClonesAndMergedTracks(bool false) and mergeAndFit)
-  void mergeSplitTracks(std::unique_ptr<LCCollectionVec>&, LCCollection*&, EVENT::TrackVec&);
+  void mergeSplitTracks(std::unique_ptr<lcio::LCCollectionVec>&, lcio::LCCollection*&, EVENT::TrackVec&);
 
   // Calculate significance in pt for two candidate clones
-  double calculateSignificancePt(const Track*, const Track*);
+  double calculateSignificancePt(const lcio::Track*, const lcio::Track*);
 
   // Calculate significance in phi for two candidate clones
-  double calculateSignificancePhi(const Track*, const Track*);
+  double calculateSignificancePhi(const lcio::Track*, const lcio::Track*);
 
   // Calculate significance in tanLambda for two candidate clones
-  double calculateSignificanceTanLambda(const Track*, const Track*);
+  double calculateSignificanceTanLambda(const lcio::Track*, const lcio::Track*);
 
   // Calculate significance for two candidate clones
   double calculateSignificance(const double firstPar, const double secondPar, const double firstPar_sigma,
                                const double secondPar_sigma);
 
   // Contains the whole clone skimming procedure (calls bestInClones and filterClonesAndMergedTracks(bool true))
-  void removeClones(EVENT::TrackVec&, LCCollection*&);
+  void removeClones(EVENT::TrackVec&, lcio::LCCollection*&);
 
   lcio::LCCollection* GetCollection(lcio::LCEvent* evt, std::string colName);
 

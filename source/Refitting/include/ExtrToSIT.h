@@ -77,12 +77,12 @@ public:
                            bool& BestHitFound, int& pointer);
 
   void SelectBestCandidateLimited(EVENT::TrackerHitVec& HitsInLayer, const float*& pivot, EVENT::TrackerHit*& BestHit,
-                                  const FloatVec& covLCIO, double& radius, bool& BestHitFound, double& sigma,
+                                  const lcio::FloatVec& covLCIO, double& radius, bool& BestHitFound, double& sigma,
                                   int& pointer, int& PossibleHits, float& dU, float& dV, double& DimDist,
-                                  TrackerHitVec& usedSiHits);
+                                  lcio::TrackerHitVec& usedSiHits);
 
-  int FitInit(std::vector<TrackerHit*> trackerHits, MarlinTrk::IMarlinTrack* _marlinTrk);
-  int FitInit2(Track* track, MarlinTrk::IMarlinTrack* _marlinTrk);
+  int FitInit(std::vector<lcio::TrackerHit*> trackerHits, MarlinTrk::IMarlinTrack* _marlinTrk);
+  int FitInit2(lcio::Track* track, MarlinTrk::IMarlinTrack* _marlinTrk);
 
   struct compare_r {
     bool operator()(EVENT::TrackerHit* a, EVENT::TrackerHit* b) const {
@@ -160,7 +160,7 @@ protected:
 
   unsigned int _nSITLayers{};
 
-  StringVec _colNamesTrackerHitRelations{};
+  lcio::StringVec _colNamesTrackerHitRelations{};
 };
 
 #endif

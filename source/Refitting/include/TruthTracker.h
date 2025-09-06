@@ -87,22 +87,22 @@ public:
 
   /** Called for every run.
    */
-  virtual void processRunHeader(LCRunHeader* run);
+  virtual void processRunHeader(lcio::LCRunHeader* run);
 
   /** Called for every event - the working horse.
    */
-  virtual void processEvent(LCEvent* evt);
+  virtual void processEvent(lcio::LCEvent* evt);
 
-  virtual void check(LCEvent* evt);
+  virtual void check(lcio::LCEvent* evt);
 
   /** Called after data processing for clean up.
    */
   virtual void end();
 
   struct SimTrackerHitSortPredicate {
-    bool operator()(std::pair<SimTrackerHit*, TrackerHit*> p1, std::pair<SimTrackerHit*, TrackerHit*> p2) {
-      SimTrackerHit* simHit1 = p1.first;
-      SimTrackerHit* simHit2 = p2.first;
+    bool operator()(std::pair<lcio::SimTrackerHit*, lcio::TrackerHit*> p1, std::pair<lcio::SimTrackerHit*, lcio::TrackerHit*> p2) {
+      lcio::SimTrackerHit* simHit1 = p1.first;
+      lcio::SimTrackerHit* simHit2 = p2.first;
 
       if (simHit1->getMCParticle() == simHit2->getMCParticle()) {
         return simHit1->getTime() < simHit2->getTime();
@@ -113,46 +113,46 @@ public:
   };
 
 protected:
-  const LCObjectVec* getSimHits(TrackerHit* trkhit, const FloatVec* weights = NULL);
+  const lcio::LCObjectVec* getSimHits(lcio::TrackerHit* trkhit, const lcio::FloatVec* weights = NULL);
 
   UTIL::BitField64* _encoder{nullptr};
-  int getDetectorID(TrackerHit* hit) {
+  int getDetectorID(lcio::TrackerHit* hit) {
     _encoder->setValue(hit->getCellID0());
     return (*_encoder)[lcio::LCTrackerCellID::subdet()];
   }
-  int getSideID(TrackerHit* hit) {
+  int getSideID(lcio::TrackerHit* hit) {
     _encoder->setValue(hit->getCellID0());
     return (*_encoder)[lcio::LCTrackerCellID::side()];
   };
-  int getLayerID(TrackerHit* hit) {
+  int getLayerID(lcio::TrackerHit* hit) {
     _encoder->setValue(hit->getCellID0());
     return (*_encoder)[lcio::LCTrackerCellID::layer()];
   };
-  int getModuleID(TrackerHit* hit) {
+  int getModuleID(lcio::TrackerHit* hit) {
     _encoder->setValue(hit->getCellID0());
     return (*_encoder)[lcio::LCTrackerCellID::module()];
   };
-  int getSensorID(TrackerHit* hit) {
+  int getSensorID(lcio::TrackerHit* hit) {
     _encoder->setValue(hit->getCellID0());
     return (*_encoder)[lcio::LCTrackerCellID::sensor()];
   };
 
   /** helper function to get collection using try catch block */
-  LCCollection* GetCollection(LCEvent* evt, std::string colName);
+  lcio::LCCollection* GetCollection(lcio::LCEvent* evt, std::string colName);
 
   /** helper function to get relations using try catch block */
-  LCRelationNavigator* GetRelations(LCEvent* evt, std::string RelName);
+  lcio::LCRelationNavigator* GetRelations(lcio::LCEvent* evt, std::string RelName);
 
   /** sets up the different collections */
-  void SetupInputCollections(LCEvent* evt);
+  void SetupInputCollections(lcio::LCEvent* evt);
 
-  void createTrack(MCParticle* mcp, UTIL::BitField64& cellID_encoder,
-                   std::vector<std::pair<SimTrackerHit*, TrackerHit*>>& hit_list);
+  void createTrack(lcio::MCParticle* mcp, UTIL::BitField64& cellID_encoder,
+                   std::vector<std::pair<lcio::SimTrackerHit*, lcio::TrackerHit*>>& hit_list);
 
-  void createTrack_old(MCParticle* mcp, UTIL::BitField64& cellID_encoder, std::vector<TrackerHit*>& hit_list);
+  void createTrack_old(lcio::MCParticle* mcp, UTIL::BitField64& cellID_encoder, std::vector<lcio::TrackerHit*>& hit_list);
 
-  void createTrack_iterative(MCParticle* mcp, UTIL::BitField64& cellID_encoder,
-                             std::vector<std::pair<SimTrackerHit*, TrackerHit*>>& hit_list);
+  void createTrack_iterative(lcio::MCParticle* mcp, UTIL::BitField64& cellID_encoder,
+                             std::vector<std::pair<lcio::SimTrackerHit*, lcio::TrackerHit*>>& hit_list);
 
   void drawEvent();
 
@@ -168,28 +168,28 @@ protected:
    */
   std::vector<std::string> _colNamesTrackerHitRelations{};
 
-  std::vector<LCCollection*> _colTrackerHits{};
-  std::vector<LCRelationNavigator*> _navTrackerHitRel{};
+  std::vector<lcio::LCCollection*> _colTrackerHits{};
+  std::vector<lcio::LCRelationNavigator*> _navTrackerHitRel{};
 
   /** output track collection
    */
   std::string _output_track_col_name{};
-  LCCollectionVec* _trackVec{nullptr};
+  lcio::LCCollectionVec* _trackVec{nullptr};
 
   /** Output track relations
    */
   std::string _output_track_rel_name{};
-  LCCollectionVec* _trackRelVec{nullptr};
+  lcio::LCCollectionVec* _trackRelVec{nullptr};
 
   /** output track segments collection, used for tracks which cannot be formed from a single fit
    */
   std::string _output_track_segments_col_name{};
-  LCCollectionVec* _trackSegmentsVec{nullptr};
+  lcio::LCCollectionVec* _trackSegmentsVec{nullptr};
 
   /** Output track segments relations, used for tracks which cannot be formed from a single fit
    */
   std::string _output_track_segment_rel_name{};
-  LCCollectionVec* _trackSegmentsRelVec{nullptr};
+  lcio::LCCollectionVec* _trackSegmentsRelVec{nullptr};
 
   int _nMCP{};
 

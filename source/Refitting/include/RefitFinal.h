@@ -42,7 +42,7 @@ public:
   virtual void end();
 
 protected:
-  int FitInit2(Track* track, MarlinTrk::IMarlinTrack* _marlinTrk);
+  int FitInit2(lcio::Track* track, MarlinTrk::IMarlinTrack* _marlinTrk);
 
   /* helper function to get collection using try catch block */
   lcio::LCCollection* GetCollection(lcio::LCEvent* evt, std::string colName);
