@@ -80,7 +80,7 @@ public:
    */
   virtual void end();
 
-  int FitInit2(Track* track, MarlinTrk::IMarlinTrack* _marlinTrk);
+  int FitInit2(lcio::Track* track, MarlinTrk::IMarlinTrack* _marlinTrk);
 
   struct compare_r {
     bool operator()(EVENT::TrackerHit* a, EVENT::TrackerHit* b) const {
@@ -95,17 +95,17 @@ public:
   // int& nHitsOnDetEl); bool getSiHit(LCCollection*& sitHitsCol, int fitElID, MarlinTrk::IMarlinTrack*& marlin_trk,
   // TrackerHit*& selectedHit);
 
-  TrackerHitPlane* getSiHit(std::vector<TrackerHitPlane*>& hitsOnDetEl, MarlinTrk::IMarlinTrack*& marlin_trk);
+  lcio::TrackerHitPlane* getSiHit(std::vector<lcio::TrackerHitPlane*>& hitsOnDetEl, MarlinTrk::IMarlinTrack*& marlin_trk);
 
-  TrackerHitPlane* getSiHit(std::vector<dd4hep::CellID>& vecElID,
-                            std::map<int, std::vector<TrackerHitPlane*>>& mapElHits,
-                            MarlinTrk::IMarlinTrack*& marlin_trk);
+  lcio::TrackerHitPlane* getSiHit(std::vector<dd4hep::CellID>& vecElID,
+                                  std::map<int, std::vector<lcio::TrackerHitPlane*>>& mapElHits,
+                                  MarlinTrk::IMarlinTrack*& marlin_trk);
 
   /* void getNeighbours(int elID, std::vector<int >& vecIDs, std::string cellIDEcoding, std::map<int , int >
    * mapLayerNModules); */
 
-  void fillMapElHits(std::vector<LCCollection*>& vecHitCol,
-                     std::vector<std::map<int, std::vector<TrackerHitPlane*>>>& vecMaps);
+  void fillMapElHits(std::vector<lcio::LCCollection*>& vecHitCol,
+                     std::vector<std::map<int, std::vector<lcio::TrackerHitPlane*>>>& vecMaps);
 
   /* void addHitOnNextElID(int elementID, MarlinTrk::IMarlinTrack*& marlin_trk, EVENT::TrackerHitVec& trkHits,
    * LCCollection*& sitHitsCol, LCCollection*& otHitsCol, int& iL, int& nSITR, int& TotalSITHits, int& SITHitsPerTrk,
@@ -118,7 +118,7 @@ public:
   void FindAndAddHit(size_t& idet, int& elID, MarlinTrk::IMarlinTrack*& mtrk, EVENT::TrackerHitVec& trkHits,
                      int& SITHitsPerTrk, int& layer);
 
-  void getCellID0AndPositionInfo(LCCollection*& col);
+  void getCellID0AndPositionInfo(lcio::LCCollection*& col);
 
 protected:
   /* helper function to get collection using try catch block */
@@ -172,17 +172,17 @@ protected:
 
   // processor parameters
 
-  StringVec _vecDigiHits{};
-  StringVec _vecSubdetName{};
+  lcio::StringVec _vecDigiHits{};
+  lcio::StringVec _vecSubdetName{};
   std::vector<bool> _vecSubdetIsBarrel{};
   std::vector<int> _vecSubdetNLayers{};
   std::vector<int> _vecSubdetID{};
-  std::vector<LCCollection*> _vecDigiHitsCol{};
+  std::vector<lcio::LCCollection*> _vecDigiHitsCol{};
   std::vector<std::map<dd4hep::CellID, std::vector<dd4hep::CellID>>*> _vecMapNeighbours{};
 
-  std::vector<std::map<int, std::vector<TrackerHitPlane*>>> _vecMapsElHits{};
+  std::vector<std::map<int, std::vector<lcio::TrackerHitPlane*>>> _vecMapsElHits{};
 
-  std::vector<std::vector<TrackerHitPlane*>> _vecvecHitsInCol{};
+  std::vector<std::vector<lcio::TrackerHitPlane*>> _vecvecHitsInCol{};
 };
 
 #endif
