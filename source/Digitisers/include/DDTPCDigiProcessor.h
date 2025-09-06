@@ -119,7 +119,7 @@ class LCRelationNavigator;
  */
 class DDTPCDigiProcessor : public marlin::Processor {
 public:
-  virtual Processor* newProcessor() { return new DDTPCDigiProcessor; }
+  virtual marlin::Processor* newProcessor() { return new DDTPCDigiProcessor; }
 
   DDTPCDigiProcessor();
 
@@ -135,13 +135,13 @@ public:
 
   /** Called for every run.
    */
-  virtual void processRunHeader(LCRunHeader* run);
+  virtual void processRunHeader(lcio::LCRunHeader* run);
 
   /** Called for every event - the working horse.
    */
-  virtual void processEvent(LCEvent* evt);
+  virtual void processEvent(lcio::LCEvent* evt);
 
-  virtual void check(LCEvent* evt);
+  virtual void check(lcio::LCEvent* evt);
 
   /** Called after data processing for clean up.
    */
@@ -149,7 +149,7 @@ public:
 
   void writeVoxelToHit(Voxel_tpc* aVoxel, UTIL::LCRelationNavigator& hitSimHitNav);
   void writeMergedVoxelsToHit(std::vector<Voxel_tpc*>* hitList, UTIL::LCRelationNavigator& hitSimHitNav);
-  void plotHelixHitResidual(MCParticle* mcp, CLHEP::Hep3Vector* thisPointRPhi);
+  void plotHelixHitResidual(lcio::MCParticle* mcp, CLHEP::Hep3Vector* thisPointRPhi);
   double getPadPhi(CLHEP::Hep3Vector* thisPointRPhi, CLHEP::Hep3Vector* firstPointRPhi,
                    CLHEP::Hep3Vector* middlePointRPhi, CLHEP::Hep3Vector* lastPointRPhi);
   double getPadTheta(CLHEP::Hep3Vector* firstPointRPhi, CLHEP::Hep3Vector* middlePointRPhi,
@@ -181,11 +181,11 @@ protected:
   EVENT::MCParticle* _nMinus2MCP{};
   EVENT::MCParticle* _nPlus2MCP{};
 
-  SimTrackerHit* _SimTHit{};
-  SimTrackerHit* _previousSimTHit{};
-  SimTrackerHit* _nextSimTHit{};
-  SimTrackerHit* _nPlus2SimHit{};
-  SimTrackerHit* _nMinus2SimHit{};
+  lcio::SimTrackerHit* _SimTHit{};
+  lcio::SimTrackerHit* _previousSimTHit{};
+  lcio::SimTrackerHit* _nextSimTHit{};
+  lcio::SimTrackerHit* _nPlus2SimHit{};
+  lcio::SimTrackerHit* _nMinus2SimHit{};
 
   // gsl random number generator
   gsl_rng* _random{};
@@ -207,12 +207,12 @@ protected:
   int _nRechits{};
 
   std::vector<std::vector<Voxel_tpc*>> _tpcRowHits{};
-  std::map<Voxel_tpc*, SimTrackerHit*> _tpcHitMap{};
+  std::map<Voxel_tpc*, lcio::SimTrackerHit*> _tpcHitMap{};
   std::vector<float> _length{};
   int lenpos{};
 
-  LCCollectionVec* _trkhitVec{};
-  CellIDEncoder<TrackerHitImpl>* _cellid_encoder{};
+  lcio::LCCollectionVec* _trkhitVec{};
+  lcio::CellIDEncoder<lcio::TrackerHitImpl>* _cellid_encoder{};
 
   int _NSimTPCHits{};
   int _NBackgroundSimTPCHits{};
@@ -229,8 +229,8 @@ protected:
   const dd4hep::rec::FixedPadSizeTPCData* _tpc{};
   double _bField{};
 
-  IntVec _tpcEndPlateModuleNumbers{};
-  FloatVec _tpcEndPlateModulePhi0s{};
+  lcio::IntVec _tpcEndPlateModuleNumbers{};
+  lcio::FloatVec _tpcEndPlateModulePhi0s{};
   float _tpcEndPlateModuleGapPhi{};
   float _tpcEndPlateModuleGapR{};
 
