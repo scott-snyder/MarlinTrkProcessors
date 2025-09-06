@@ -71,13 +71,13 @@ public:
 
   /** Called for every run.
    */
-  virtual void processRunHeader(LCRunHeader* run);
+  virtual void processRunHeader(lcio::LCRunHeader* run);
 
   /** Called for every event - the working horse.
    */
-  virtual void processEvent(LCEvent* evt);
+  virtual void processEvent(lcio::LCEvent* evt);
 
-  virtual void check(LCEvent* evt);
+  virtual void check(lcio::LCEvent* evt);
 
   /** Called after data processing for clean up.
    */
@@ -92,38 +92,38 @@ protected:
 
   void write_buffer_to_histo(std::map<std::string, std::list<float>*>::iterator it_buffer);
 
-  const LCObjectVec* getSimHits(TrackerHit* trkhit, const FloatVec* weights = NULL);
+  const lcio::LCObjectVec* getSimHits(lcio::TrackerHit* trkhit, const lcio::FloatVec* weights = NULL);
 
   UTIL::BitField64* _encoder{nullptr};
-  int getDetectorID(TrackerHit* hit) {
+  int getDetectorID(lcio::TrackerHit* hit) {
     _encoder->setValue(hit->getCellID0());
     return (*_encoder)[lcio::LCTrackerCellID::subdet()];
   }
-  int getSideID(TrackerHit* hit) {
+  int getSideID(lcio::TrackerHit* hit) {
     _encoder->setValue(hit->getCellID0());
     return (*_encoder)[lcio::LCTrackerCellID::side()];
   };
-  int getLayerID(TrackerHit* hit) {
+  int getLayerID(lcio::TrackerHit* hit) {
     _encoder->setValue(hit->getCellID0());
     return (*_encoder)[lcio::LCTrackerCellID::layer()];
   };
-  int getModuleID(TrackerHit* hit) {
+  int getModuleID(lcio::TrackerHit* hit) {
     _encoder->setValue(hit->getCellID0());
     return (*_encoder)[lcio::LCTrackerCellID::module()];
   };
-  int getSensorID(TrackerHit* hit) {
+  int getSensorID(lcio::TrackerHit* hit) {
     _encoder->setValue(hit->getCellID0());
     return (*_encoder)[lcio::LCTrackerCellID::sensor()];
   };
 
   /** helper function to get collection using try catch block */
-  LCCollection* GetCollection(LCEvent* evt, std::string colName);
+  lcio::LCCollection* GetCollection(lcio::LCEvent* evt, std::string colName);
 
   /** helper function to get relations using try catch block */
-  LCRelationNavigator* GetRelations(LCEvent* evt, std::string RelName);
+  lcio::LCRelationNavigator* GetRelations(lcio::LCEvent* evt, std::string RelName);
 
   /** sets up the different collections */
-  void SetupInputCollections(LCEvent* evt);
+  void SetupInputCollections(lcio::LCEvent* evt);
 
   /** input TrackerHit collections
    */
@@ -138,8 +138,8 @@ protected:
   int _n_evt{};
   int _current_evt_number{};
 
-  std::vector<LCCollection*> _colTrackerHits{};
-  std::vector<LCRelationNavigator*> _navTrackerHitRel{};
+  std::vector<lcio::LCCollection*> _colTrackerHits{};
+  std::vector<lcio::LCRelationNavigator*> _navTrackerHitRel{};
 
   TFile* _root_file{nullptr};
 
