@@ -1,3 +1,8 @@
+# v02-12-09
+
+* 2026-03-27 Bohdan Dudar ([PR#79](https://github.com/iLCSoft/MarlinTrkProcessors/pull/79))
+  - [Fix MarlinReco#157](https://github.com/iLCSoft/MarlinReco/issues/157)
+
 # v02-12-08
 
 * 2025-06-20 Thomas Madlener ([PR#76](https://github.com/iLCSoft/MarlinTrkProcessors/pull/76))
