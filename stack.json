@@ -1,9 +1,8 @@
 {
   "version": 5,
-  "prev": "9dddc7439e4ea2ce3871db675ad6083ef1ea221d",
-  "head": "fb6e0ca9d2ff2f01f515f2624b57572b4d279baa",
+  "prev": "2dabe99f65c3e46fbcf7d4de5df3e5940b6d87bb",
+  "head": "730a8516d36a8533acf2a9ffae93c42eb212b036",
   "applied": [
-    "clang",
     "cmakewarn",
     "nosystem",
     "using"
@@ -11,17 +10,14 @@
   "unapplied": [],
   "hidden": [],
   "patches": {
-    "clang": {
-      "oid": "fe1a40d775e09997273d237c502d59cd712d6429"
-    },
     "cmakewarn": {
-      "oid": "814b70ea4d70da60ab67bd64de368abd79b6ca13"
+      "oid": "0676e51c564553fc3388e52aafbfa1638778869f"
     },
     "nosystem": {
-      "oid": "b25e8dd5c28d8a2958f6df76f195f2290feca710"
+      "oid": "5d24f8b11a296a0559ed1fe5acb27f19408ca1e9"
     },
     "using": {
-      "oid": "fb6e0ca9d2ff2f01f515f2624b57572b4d279baa"
+      "oid": "730a8516d36a8533acf2a9ffae93c42eb212b036"
     }
   }
 }
